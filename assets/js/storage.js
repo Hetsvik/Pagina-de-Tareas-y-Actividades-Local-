@@ -12,7 +12,11 @@ const isoAt = (days, hour, minute = 0) => {
 function seedData() {
   return {
     employees: [
-      
+      { id: 'admin-1', name: 'Administrador General', code: 'AD001', pin: '0671', role: 'admin', position: 'Administrador', active: true },
+      { id: 'emp-1', name: 'Adonis Vasquez', code: 'EM0038', pin: '1020', role: 'employee', position: 'Arquitecto', active: true },
+      { id: 'emp-2', name: 'Benjamin Alfonso', code: 'EM0014', pin: '8844', role: 'employee', position: 'Ingeniero de Sistemas', active: true },
+      { id: 'emp-3', name: 'Celeste Lechuga', code: 'EM0030', pin: '7777', role: 'employee', position: 'Arquitecta', active: true },
+      { id: 'emp-4', name: 'Xiomara Ramirez', code: 'EM0033', pin: '7920', role: 'employee', position: 'Arquitecta', active: true }
     ],
     attendance: [
       { id: 'att-1', employeeId: 'emp-1', entry: isoAt(-2, 9, 12), exit: isoAt(-2, 18, 4) },
