@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "api-backend-control",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-21",
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true,
+  "account_id": "cd91effb056556a76fb16218be731f95",
+  "hyperdrive": [
+    {
+      "binding": "PROD_DB",
+      "id": "3a17290fa8f94cb0b407fa1d1afc6cfb"
+    }
+  ]
+}
