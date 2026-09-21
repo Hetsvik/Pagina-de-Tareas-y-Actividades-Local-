@@ -60,10 +60,38 @@ export function getCurrentUser() {
   if (!session) return null;
   return getData().employees.find((employee) => employee.id === session.id && employee.active) || null;
 }
-export function authenticate(code, pin, role) {
-  const normalized = code.trim().toUpperCase();
-  return getData().employees.find((employee) => employee.active && employee.role === role && employee.code.toUpperCase() === normalized && employee.pin === pin.trim()) || null;
+export async function authenticate(code, pin, role) {
+  try {
+    const WORKER_URL = 'https://api-backend-control.calebalfonso83.workers.dev'; 
+
+    const response = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, pin, role })
+    });
+
+    const result = await response.json();
+    
+    if (result.success) {
+      // Sincronizamos dinámicamente con el localStorage del Frontend para que el resto de pestañas no se rompan
+      const localData = getData();
+      const exists = localData.employees.some(e => e.id === result.user.id);
+      if (!exists) {
+        localData.employees.push(result.user);
+        saveData(localData);
+      }
+      return result.user; 
+    } else {
+      alert(result.message || 'Credenciales incorrectas');
+      return null;
+    }
+  } catch (error) {
+    console.error("Error conectando con el backend en Cloudflare:", error);
+    alert('Error de conexión con el servidor.');
+    return null;
+  }
 }
+ 
 export function getEmployee(id) { return getData().employees.find((employee) => employee.id === id); }
 export function employees() { return getData().employees.filter((employee) => employee.role === 'employee' && employee.active); }
 export function todayAttendance(employeeId) {
