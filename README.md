@@ -1,3 +1,6 @@
+
+#Link: https://pagina-de-tareas-y-actividades-local.pages.dev
+
 # Control laboral
 
 Aplicación estática de asistencia y actividades, preparada para desplegarse en Cloudflare. No utiliza Python, Streamlit, MySQL ni dependencias de compilación.
